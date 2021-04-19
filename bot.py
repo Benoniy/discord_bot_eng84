@@ -54,15 +54,15 @@ async def on_guild_join(guild):
 async def on_message(message):
     """  This is run when a message is received on any channel """
     author = message.author
-    o_args = message.content.split(' ')
+    o_args = message.content.strip().lower().split(' ')
 
-    if author != client.user and BOT_PREFIX in message.content:
+    if author != client.user and BOT_PREFIX in o_args[0]:
         o_args[0] = o_args[0].replace(BOT_PREFIX, "")
         args = []
 
         for arg in o_args:
             if regex.search("[A-Z]+|[a-z]+|\d+", arg):
-                args.append(arg.lower())
+                args.append(arg)
 
         if args[0] == "clear":
             await message.channel.send(".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.")
