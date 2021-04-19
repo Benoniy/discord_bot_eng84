@@ -45,6 +45,7 @@ async def bot_help(message):
                                "`}groups x` - Used to create groups of x many people.\n"
                                "`}roll x y` - Used to roll x many y sized dice.\n"
                                "`}flip_coin` - Returns heads or tails.\n"
+                               "`}agile` - Lists the four values of agile"
                                )
 
 
