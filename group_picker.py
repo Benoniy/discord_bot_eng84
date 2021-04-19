@@ -32,9 +32,10 @@ def split_list(mem_count):
         members.pop(rand)
         count += 1
         if count == mem_count:
-            if len(members) < mem_count:
-                string += ", " + members[0]
-                members.pop(0)
+            if len(members) < mem_count / 2:
+                for m in members:
+                    string += ", " + members[0]
+                    members.pop(0)
             full_str += f"Team {team_no}: {string}\n"
 
             string = ""
