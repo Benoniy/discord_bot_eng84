@@ -7,6 +7,7 @@ import discord
 from regex import regex
 
 import Commands
+import group_picker
 
 logging.basicConfig(filename="log.txt", level=logging.DEBUG, filemode="w")
 
@@ -66,6 +67,9 @@ async def on_message(message):
 
         if args[0] == "clear":
             await message.channel.send(".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.")
+        elif args[0] == "groups":
+            await message.channel.send(group_picker.split_list(int(args[1])))
+
 
 
 def is_authorized(message):
