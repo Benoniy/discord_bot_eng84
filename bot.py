@@ -1,15 +1,11 @@
 # BasicBot
 # Code lifted from StockImage bot by meed223 with other minor contributors
 
-
 import logging
 import discord
 from regex import regex
-
 import commands
 
-import commands
-import group_picker
 
 logging.basicConfig(filename="log.txt", level=logging.DEBUG, filemode="w")
 
@@ -17,6 +13,7 @@ logging.basicConfig(filename="log.txt", level=logging.DEBUG, filemode="w")
 client = discord.Client()
 TOKEN = ""
 BOT_PREFIX = ""
+
 
 def setup():
     """ Get token & prefix from file and assigns to variables """
@@ -70,8 +67,11 @@ async def on_message(message):
         if args[0] == "clear":
             await commands.clear(message)
         elif args[0] == "groups":
-            await commands.group_pick(message, int(args[1]))
-
+            await commands.group_pick(message, args)
+        elif args[0] == "help":
+            await commands.bot_help(message)
+        else:
+            await message.channel.send("Command not recognised, use }help to see all available commands!")
 
 
 def is_authorized(message):

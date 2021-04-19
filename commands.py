@@ -3,18 +3,37 @@ import group_picker
 from bot import is_authorized
 
 
+async def check_args(message, args, amount):
+    try:
+        a = args[amount]
+        return True
+    except IndexError:
+        await message.channel.send(f"Error this command requires {amount} arguments")
+        return False
+
+
 async def clear(message):
     await message.channel.send(".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
                                "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.")
 
 
-async def group_pick(message, members):
-    await message.channel.send(group_picker.split_list(members))
+async def group_pick(message, args):
+    if await check_args(message, args, 1):
+        members = args[1]
+        if members.isdigit():
+            members = int(members)
+            if members > 0:
+                await message.channel.send(group_picker.split_list(members))
+            else:
+                await message.channel.send("Please enter an argument that is greater than 0!")
+        else:
+            await message.channel.send("Please enter an argument that is a number!")
 
 
 async def bot_help(message):
     """ Provides a list of commands to the user """
-    await message.channel.send("`}clear` - used to clear the page so that we don't get in trouble.\n"
+    await message.channel.send("`}help` - for obvious reasons.\n"
+                               "`}clear` - used to clear the page so that we don't get in trouble.\n"
                                "`}groups x` - Used to create groups of x many people.\n"
                                )
 
