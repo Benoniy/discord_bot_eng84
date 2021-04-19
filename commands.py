@@ -12,6 +12,14 @@ async def check_args(message, args, amount):
         return False
 
 
+async def agile(message):
+    await message.channel.send("Whilst there is value to the items on the right, we should value items on the left more!\n"
+                               f"1. {'`Individuals and Interactions`':>30} over `Processes and Tools`\n"
+                               f"2. {'`Working Software`':>42} over `Comprehensive Documentation`\n"
+                               f"3. {'`Customer Collaboration`':>36} over `Contract Negotiation`\n"
+                               f"4. {'`Responding to Change`':>38} over `Following a Plan`\n")
+
+
 async def clear(message):
     await message.channel.send(".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
                                "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.")
@@ -51,19 +59,14 @@ async def roll_dice(message, args):
             no_dice = int(args[1])
             no_sides = int(args[2])
 
+            # Check size - avoid excess calculation
             if no_dice > 20:
                 no_dice = 20
 
             if no_sides > 120:
                 no_sides = 120
 
-            # Check size - avoid excess calculation
-            if no_dice > 10:
-                no_dice = 10
-            if no_sides > 100:
-                no_sides = 100
-
-            # Run dice-rolls
+            # Run dice-role's
             for die in range(no_dice):
                 roll = random.randint(1, no_sides)
                 to_send += "{0},\n".format(roll)

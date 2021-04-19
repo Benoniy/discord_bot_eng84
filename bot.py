@@ -74,6 +74,8 @@ async def on_message(message):
             await commands.flip_coin(message)
         elif args[0] == "roll":
             await commands.roll_dice(message, args)
+        elif args[0] == "agile":
+            await commands.agile(message)
         else:
             await message.channel.send("Command not recognised, use }help to see all available commands!")
 
