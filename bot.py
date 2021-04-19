@@ -35,7 +35,7 @@ async def on_ready():
     print("Bot is Ready")
     await client.change_presence(activity=discord.Activity(
                                  type=discord.ActivityType.listening,
-                                 name="commands"))
+                                 name="}commands"))
 
 
 @client.event
@@ -70,6 +70,12 @@ async def on_message(message):
             await commands.group_pick(message, args)
         elif args[0] == "help":
             await commands.bot_help(message)
+        elif args[0] == "flip_coin":
+            await commands.flip_coin(message)
+        elif args[0] == "roll":
+            await commands.roll_dice(message, args)
+        elif args[0] == "agile":
+            await commands.agile(message)
         else:
             await message.channel.send("Command not recognised, use }help to see all available commands!")
 
