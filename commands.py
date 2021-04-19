@@ -32,37 +32,47 @@ async def group_pick(message, args):
 
 async def bot_help(message):
     """ Provides a list of commands to the user """
-    await message.channel.send("`}help` - for obvious reasons.\n"
-                               "`}clear` - used to clear the page so that we don't get in trouble.\n"
+    await message.channel.send("`}help` - For obvious reasons.\n"
+                               "`}clear` - Used to clear the page so that we don't get in trouble.\n"
                                "`}groups x` - Used to create groups of x many people.\n"
+                               "`}roll x y` - Used to roll x many y sized dice.\n"
+                               "`}flip_coin` - Returns heads or tails.\n"
                                )
 
 
 async def roll_dice(message, args):
     """ Rolls a specified number of user defined dice """
-    to_send = ""
 
-    try:
-        # Send values specified in message to int
-        no_dice = int(args[1])
-        no_sides = int(args[2])
+    if await check_args(message, args, 2):
+        to_send = ""
 
-        # Check size - avoid excess calculation
-        if no_dice > 10:
-            no_dice = 10
-        if no_sides > 100:
-            no_sides = 100
+        if args[1].isdigit() and args[2].isdigit():
+            # Send values specified in message to int
+            no_dice = int(args[1])
+            no_sides = int(args[2])
 
-        # Run dice-rolls
-        for die in range(no_dice):
-            roll = random.randint(1, no_sides)
-            to_send += "{0}, ".format(roll)
+            if no_dice > 20:
+                no_dice = 20
 
-        # Send Message
-        await message.channel.send(to_send)
+            if no_sides > 120:
+                no_sides = 120
 
-    except ValueError:
-        await message.channel.send("**Error:** }roll should have 2 arguments!")
+            # Check size - avoid excess calculation
+            if no_dice > 10:
+                no_dice = 10
+            if no_sides > 100:
+                no_sides = 100
+
+            # Run dice-rolls
+            for die in range(no_dice):
+                roll = random.randint(1, no_sides)
+                to_send += "{0},\n".format(roll)
+
+            to_send = to_send[:-2]
+            # Send Message
+            await message.channel.send(to_send)
+        else:
+            await message.channel.send("Both of your arguments should be numbers!")
 
 
 async def flip_coin(message):
