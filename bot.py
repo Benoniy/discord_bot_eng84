@@ -56,7 +56,7 @@ async def on_message(message):
     author = message.author
     o_args = message.content.strip().lower().split(' ')
 
-    if author != client.user and BOT_PREFIX in o_args[0]:
+    if author != client.user and BOT_PREFIX == o_args[0][0]:
         o_args[0] = o_args[0].replace(BOT_PREFIX, "")
         args = []
 
