@@ -31,7 +31,7 @@ async def group_pick(message, args):
         if members.isdigit():
             members = int(members)
             if members > 0:
-                await message.channel.send(group_picker.split_list(members))
+                await message.channel.send(group_picker.gen_groups(members))
             else:
                 await message.channel.send("Please enter an argument that is greater than 0!")
         else:

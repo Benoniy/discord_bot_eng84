@@ -1,18 +1,18 @@
 import random
 
-orig_members = ["Andrew",
-                "Arun",
-                "Alexis",
-                "Ben",
-                "Beth",
-                "Dunni",
-                "Isobel",
-                "Jordan",
-                "Jose",
-                "Oleg",
-                "Saverio",
-                "William",
-                "Ula"
+eng84_members = ["Andrew",
+                 "Arun",
+                 "Alexis",
+                 "Ben",
+                 "Beth",
+                 "Dunni",
+                 "Isobel",
+                 "Jordan",
+                 "Jose",
+                 "Oleg",
+                 "Saverio",
+                 "William",
+                 "Ula"
                 ]
 
 
@@ -62,29 +62,12 @@ def display_groups(groups):
 
     return message
 
-  
-def split_list(group_by):
-    return display_groups(group_items(orig_members, group_by))
+
+def gen_groups(size):
+    groups = group_items(eng84_members.copy(), size)
+    return display_groups(groups)
 
 
 # showcase function
 if __name__ == "__main__":
-
-    # TEST 1
-    members = test_members
-    groups = group_items(members, 7)
-    print('Initial members list:')
-    print(members)
-    print('Groups:')
-    print(display_groups(groups))
-
-    # TEST 2
-    # members = orig_members
-    # groups = group_items(members, 3)
-    # print('Initial members list:')
-    # print(members)
-    # print('Groups:')
-    # print(display_groups(groups))
-
-    # TEST 3
-    # print(split_list(3))
+    print(gen_groups(3))
