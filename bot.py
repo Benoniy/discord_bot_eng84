@@ -69,7 +69,7 @@ async def on_message(message):
         elif args[0] == "groups":
             await commands.group_pick(message, args)
         elif args[0] == "help":
-            await commands.bot_help(message)
+            await commands.bot_help(message, BOT_PREFIX)
         elif args[0] == "flip_coin":
             await commands.flip_coin(message)
         elif args[0] == "roll":
