@@ -77,7 +77,7 @@ async def on_message(message):
         elif args[0] == "agile":
             await commands.agile(message)
         else:
-            await message.channel.send("Command not recognised, use }help to see all available commands!")
+            await message.channel.send(f"Command not recognised, use {BOT_PREFIX}help to see all available commands!")
 
 
 def is_authorized(message):
