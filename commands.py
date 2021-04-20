@@ -38,14 +38,14 @@ async def group_pick(message, args):
             await message.channel.send("Please enter an argument that is a number!")
 
 
-async def bot_help(message):
+async def bot_help(message, prefix):
     """ Provides a list of commands to the user """
-    await message.channel.send("`}help` - For obvious reasons.\n"
-                               "`}clear` - Used to clear the page so that we don't get in trouble.\n"
-                               "`}groups x` - Used to create groups of x many people.\n"
-                               "`}roll x y` - Used to roll x many y sized dice.\n"
-                               "`}flip_coin` - Returns heads or tails.\n"
-                               "`}agile` - Lists the four values of agile"
+    await message.channel.send(f"`{prefix}help` - For obvious reasons.\n"
+                               f"`{prefix}clear` - Used to clear the page so that we don't get in trouble.\n"
+                               f"`{prefix}groups x` - Used to create groups of x many people.\n"
+                               f"`{prefix}roll x y` - Used to roll x many y sized dice.\n"
+                               f"`{prefix}flip_coin` - Returns heads or tails.\n"
+                               f"`{prefix}agile` - Lists the four values of agile"
                                )
 
 

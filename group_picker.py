@@ -1,23 +1,5 @@
 import random
 
-test_members = [
-        "A1", "A2", "A3", "A4", "A5",
-        "B1", "B2", "B3", "B4", "B5",
-        "C1", "C2", "C3", "C4", "C5",
-        "D1", "D2", "D3", "D4", "D5",
-        "E1", "E2", "E3", "E4", "E5",
-        "F1", "F2", "F3", "F4", "F5",
-        "G1", "G2", "G3", "G4", "G5",
-        "H1", "H2", "H3", "H4", "H5",
-        "I1", "I2", "I3", "I4", "I5",
-        "J1", "J2", "J3", "J4", "J5",
-        "K1", "K2", "K3", "K4", "K5",
-        "L1", "L2", "L3", "L4", "L5",
-        "M1", "M2", "M3", "M4", "M5",
-        "N1", "N2", "N3", "N4", "N5",
-        "O1", "O2", "O3", "O4", "O5",
-        ]
-
 orig_members = ["Andrew",
                 "Arun",
                 "Alexis",
@@ -80,8 +62,10 @@ def display_groups(groups):
 
     return message
 
+  
 def split_list(group_by):
     return display_groups(group_items(orig_members, group_by))
+
 
 # showcase function
 if __name__ == "__main__":
@@ -104,5 +88,3 @@ if __name__ == "__main__":
 
     # TEST 3
     # print(split_list(3))
-
-

@@ -35,7 +35,7 @@ async def on_ready():
     print("Bot is Ready")
     await client.change_presence(activity=discord.Activity(
                                  type=discord.ActivityType.listening,
-                                 name="}commands"))
+                                 name=f"{BOT_PREFIX}commands"))
 
 
 @client.event
@@ -56,7 +56,7 @@ async def on_message(message):
     author = message.author
     o_args = message.content.strip().lower().split(' ')
 
-    if author != client.user and BOT_PREFIX in o_args[0]:
+    if author != client.user and BOT_PREFIX == o_args[0][0]:
         o_args[0] = o_args[0].replace(BOT_PREFIX, "")
         args = []
 
@@ -69,7 +69,7 @@ async def on_message(message):
         elif args[0] == "groups":
             await commands.group_pick(message, args)
         elif args[0] == "help":
-            await commands.bot_help(message)
+            await commands.bot_help(message, BOT_PREFIX)
         elif args[0] == "flip_coin":
             await commands.flip_coin(message)
         elif args[0] == "roll":
