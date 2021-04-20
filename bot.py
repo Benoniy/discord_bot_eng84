@@ -35,7 +35,7 @@ async def on_ready():
     print("Bot is Ready")
     await client.change_presence(activity=discord.Activity(
                                  type=discord.ActivityType.listening,
-                                 name="}commands"))
+                                 name=f"{BOT_PREFIX}commands"))
 
 
 @client.event
