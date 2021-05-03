@@ -10,10 +10,10 @@ import yaml
 from aiohttp import ClientSession
 
 from discord.ext import commands, tasks
-from discord.colour import Colour
 from typing import Optional, Literal
 
 import group_picker
+import scheduling
 
 # import bot_commands
 
@@ -42,7 +42,6 @@ def setup():
             TOKEN = io.get('token')
             BOT_PREFIX = io.get('prefix')
             URBAN_API_KEY = io.get('urban_api_key')
-            print(f"{URBAN_API_KEY=}")
 
         except yaml.YAMLError as exc:
             print(exc)
@@ -54,6 +53,16 @@ def setup():
         # BOT_PREFIX = file.readline().replace("\n", "")
         # file.close()
         logging.info(f"Bot token '{TOKEN}' and prefix '{BOT_PREFIX}' are set")
+
+
+@bot.event
+async def on_ready():
+    """ Set Discord Status """
+    logging.info("Bot is Ready")
+    print("Bot is Ready")
+    await bot.change_presence(activity=discord.Activity(
+                                 type=discord.ActivityType.listening,
+                                 name=f"{BOT_PREFIX}commands"))
 
 
 @bot.command(name='clear', help='Used to clear the page for x minutes')
@@ -121,13 +130,12 @@ async def flip_coin(context):
     """ Flips a coin and displays the result """
     to_send = ""
     flip = bool(random.getrandbits(1))
-
     if flip:
         to_send += "Heads!"
     else:
         to_send += "Tails!"
 
-    await message.channel.send(to_send)
+    await context.channel.send(to_send)
 
 
 @bot.command(name="agile", help="List agile values")
@@ -158,6 +166,27 @@ async def urban(context, term):
             embed.add_field(name="Definition", value=definition, inline=True)
 
             await context.channel.send(embed=embed)
+
+
+@bot.group(name="schedule", help="Show schedule", invoke_without_command=True, aliases=['scedule', 'shedule', 'shcedule'])
+async def schedule(context):
+    sch = scheduling.Week()
+    await context.channel.send(sch.get_schedule())
+
+
+@schedule.command(name='get')
+async def schedule_get(context, *, args: str):
+    sch = scheduling.Week()
+    to_send = sch.get_time(args.lower())
+    if to_send is not None:
+        await context.channel.send(to_send)
+    else:
+        await context.channel.send("Invalid input")
+
+
+@schedule.command(name='set')
+async def schedule_set(context):
+    await context.channel.send('Setting day')
 
 
 if __name__ == "__main__":
