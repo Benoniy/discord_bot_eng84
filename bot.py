@@ -10,7 +10,6 @@ import yaml
 from aiohttp import ClientSession
 
 from discord.ext import commands, tasks
-from typing import Optional, Literal
 
 import group_picker
 import scheduling
@@ -26,7 +25,8 @@ TOKEN = ""
 BOT_PREFIX = "+"
 URBAN_API_KEY = ""
 
-bot = commands.Bot(command_prefix=BOT_PREFIX)
+bot = commands.Bot(command_prefix=BOT_PREFIX, case_insensitive=True)
+bot.remove_command('help')
 
 
 def setup():
@@ -66,11 +66,11 @@ async def on_ready():
 
 
 @bot.command(name='clear', help='Used to clear the page for x minutes')
-async def clear(context, minutes: Optional[int] = 5):
+async def clear(context, minutes=1):
     """ Sending large message to clear screen temporarily """
     message = await context.channel.send(
-            ".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
-            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
+            ".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
+            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
             )
     # Waiting time in minutes
     await asyncio.sleep(minutes * 60)
@@ -79,7 +79,7 @@ async def clear(context, minutes: Optional[int] = 5):
 
 
 @bot.command(name='groups', help='Try to create groups of x many people. Default to groups of 2')
-async def groups(context, *, number_of_people: Optional[int] = 2):
+async def groups(context, *, number_of_people=2):
     """ Pick groups """
     if number_of_people < 1:
         await context.channel.send('Number of people in groups must be above 0')
@@ -103,21 +103,25 @@ class DiceNumber(NumeberWithThreshold):
         return await super().convert(*args, threshold=20)
 
 
-@bot.command(name='roll', help='Roll y dice of x sides.', aliases=["rol"])
-async def roll_dice(context, x: Optional[SidesNumber] = 6, y: Optional[DiceNumber] = 1):
+@bot.command(name='roll', help="Roll's x number of y sided dice.", aliases=["rol"])
+async def roll_dice(context, x=1, y=6):
     """ Rolls a specified number of user defined dice
 
-        If x or y is not a digit, it will take the default value of 6 and 1 respectively
+        If x or y is not a digit, it will take the default value of 1 and 6 respectively
         Additionally, sides and dice have max values of 120 and 20. If the input surpasses the
-        max values, they automatically get assinged their max value
+        max values, they automatically get assigned their max value
 
     """
+
+    # Round and clamp values
+    x = round(max(min(20, x), 1))
+    y = round(max(min(120, y), 1))
     # print(x, y)
     if x > 0 and y > 0:
 
         to_send = "Rolled:\n"
-        for die in range(y):
-            roll = random.randint(1, x)
+        for die in range(x):
+            roll = random.randint(1, y)
             to_send += "{0},\n".format(roll)
         to_send = to_send[:-2]
         await context.channel.send(to_send)
@@ -188,6 +192,10 @@ async def schedule_get(context, *, args: str):
 async def schedule_set(context):
     await context.channel.send('Setting day')
 
+
+@bot.command(name="help")
+async def help(context):
+    print("ok")
 
 if __name__ == "__main__":
     try:
