@@ -6,7 +6,6 @@ import discord
 # from regex import regex
 import asyncio
 import random
-import yaml
 from aiohttp import ClientSession
 
 from discord.ext import commands, tasks
@@ -31,17 +30,15 @@ bot.remove_command('help')
 
 def setup():
     """ Get token & prefix from file and assigns to variables """
-    with open("tokens.yaml") as stream:
-
-        global TOKEN
-        global BOT_PREFIX
-        global URBAN_API_KEY
-        file = open("token.txt", "r")
-        TOKEN = file.readline().replace("\n", "")
-        BOT_PREFIX = file.readline().replace("\n", "")
-        URBAN_API_KEY = file.readline().replace("\n", "")
-        file.close()
-        logging.info(f"Bot token '{TOKEN}' and prefix '{BOT_PREFIX}' are set")
+    global TOKEN
+    global BOT_PREFIX
+    global URBAN_API_KEY
+    file = open("token.txt", "r")
+    TOKEN = file.readline().replace("\n", "")
+    BOT_PREFIX = file.readline().replace("\n", "")
+    URBAN_API_KEY = file.readline().replace("\n", "")
+    file.close()
+    logging.info(f"Bot token '{TOKEN}' and prefix '{BOT_PREFIX}' are set")
 
 
 @bot.event
