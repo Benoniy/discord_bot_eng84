@@ -3,4 +3,5 @@ __pycache__/
 .python-version
 
 token.txt
+tokens.yaml
 log.txt
