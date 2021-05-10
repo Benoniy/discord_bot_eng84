@@ -165,7 +165,7 @@ async def urban(context, term):
         async with session.get(url, headers=headers, params=querystring) as response:
             r = await response.json()
             definition = r['list'][0]['definition']
-            print(f"{definition=}")
+            print(definition + "=")
             embed = discord.Embed(title=term,)
             embed.add_field(name="Definition", value=definition, inline=True)
 
