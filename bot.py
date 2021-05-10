@@ -36,23 +36,12 @@ def setup():
         global TOKEN
         global BOT_PREFIX
         global URBAN_API_KEY
-        try:
-            io = yaml.safe_load(stream)
-            logging.info(io)
-            TOKEN = io.get('token')
-            BOT_PREFIX = io.get('prefix')
-            URBAN_API_KEY = io.get('urban_api_key')
-
-        except yaml.YAMLError as exc:
-            print(exc)
-            logging.error(exc)
-
-        # TOKEN = file.readline().replace("\n", "")
-
-        # global BOT_PREFIX
-        # BOT_PREFIX = file.readline().replace("\n", "")
-        # file.close()
-        logging.info("Bot token " + TOKEN + " and prefix " + BOT_PREFIX + "' are set")
+        file = open("token.txt", "r")
+        TOKEN = file.readline().replace("\n", "")
+        BOT_PREFIX = file.readline().replace("\n", "")
+        URBAN_API_KEY = file.readline().replace("\n", "")
+        file.close()
+        logging.info(f"Bot token '{TOKEN}' and prefix '{BOT_PREFIX}' are set")
 
 
 @bot.event
