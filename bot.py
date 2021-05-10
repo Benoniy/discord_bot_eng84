@@ -87,18 +87,18 @@ async def groups(context, *, number_of_people=2):
         await context.channel.send(group_picker.gen_groups(number_of_people))
 
 
-class NumeberWithThreshold(commands.Converter):
+class NumberWithThreshold(commands.Converter):
     async def convert(self, context, argument, threshold=100):
         argument = int(argument)
         return argument if argument <= threshold else threshold
 
 
-class SidesNumber(NumeberWithThreshold):
+class SidesNumber(NumberWithThreshold):
     async def convert(self, *args):
         return await super().convert(*args, threshold=120)
 
 
-class DiceNumber(NumeberWithThreshold):
+class DiceNumber(NumberWithThreshold):
     async def convert(self, *args):
         return await super().convert(*args, threshold=20)
 
@@ -195,7 +195,18 @@ async def schedule_set(context):
 
 @bot.command(name="help")
 async def help(context):
-    print("ok")
+    """ Provides a list of commands to the user """
+    await context.channel.send(f"\n"
+                               f"• `{BOT_PREFIX}help     ` - For obvious reasons.\n"
+                               f"• `{BOT_PREFIX}clear x  ` - Used to clear the page for x many minutes so that we don't get in trouble.\n"
+                               f"• `{BOT_PREFIX}groups x ` - Used to create groups of x many people.\n"
+                               f"• `{BOT_PREFIX}roll x y ` - Used to roll x many y sized dice.\n"
+                               f"• `{BOT_PREFIX}flip_coin` - Returns heads or tails.\n"
+                               f"• `{BOT_PREFIX}agile    ` - Lists the four values of agile\n"
+                               f"• `{BOT_PREFIX}schedule ` - Shows the schedule\n"
+                               f"• `{BOT_PREFIX}urban x  ` - Gets the urban dictionary definition of x"
+                               f"\n"
+                               )
 
 if __name__ == "__main__":
     try:
