@@ -52,7 +52,7 @@ def setup():
         # global BOT_PREFIX
         # BOT_PREFIX = file.readline().replace("\n", "")
         # file.close()
-        logging.info(f"Bot token '{TOKEN}' and prefix '{BOT_PREFIX}' are set")
+        logging.info("Bot token " + TOKEN + " and prefix " + BOT_PREFIX + "' are set")
 
 
 @bot.event
@@ -62,7 +62,7 @@ async def on_ready():
     print("Bot is Ready")
     await bot.change_presence(activity=discord.Activity(
                                  type=discord.ActivityType.listening,
-                                 name=f"{BOT_PREFIX}commands"))
+                                 name=BOT_PREFIX + "commands"))
 
 
 @bot.command(name='clear', help='Used to clear the page for x minutes')
