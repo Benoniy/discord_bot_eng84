@@ -144,11 +144,11 @@ async def flip_coin(context):
 
 @bot.command(name="agile", help="List agile values")
 async def agile(context):
-    await context.channel.send("Whilst there is value to the items on the right, we should value items on the left more!\n"
-                               f"1. {'`Individuals and Interactions`':>30} over `Processes and Tools`\n"
-                               f"2. {'`Working Software`':>42} over `Comprehensive Documentation`\n"
-                               f"3. {'`Customer Collaboration`':>36} over `Contract Negotiation`\n"
-                               f"4. {'`Responding to Change`':>38} over `Following a Plan`\n")
+    await context.channel.send("Whilst there is value to the items on the right, we should value items on the left more!\n" +
+                               "1. {rule:>30} over `Processes and Tools`\n".format(rule='`Individuals and Interactions`') +
+                               "2. {rule:>42} over `Comprehensive Documentation`\n".format(rule='`Working Software`') +
+                               "3. {rule:>36} over `Contract Negotiation`\n".format(rule='`Customer Collaboration`') +
+                               "4. {rule:>38} over `Following a Plan`\n".format(rule='`Responding to Change`'))
 
 
 @bot.command(name="urban", help="Return nth urban dictionary definition", aliases=["ubran", "urband"])
@@ -197,15 +197,15 @@ async def schedule_set(context):
 async def help(context):
     """ Provides a list of commands to the user """
     await context.channel.send(f"\n"
-                               f"• `{BOT_PREFIX}help     ` - For obvious reasons.\n"
-                               f"• `{BOT_PREFIX}clear x  ` - Used to clear the page for x many minutes so that we don't get in trouble.\n"
-                               f"• `{BOT_PREFIX}groups x ` - Used to create groups of x many people.\n"
-                               f"• `{BOT_PREFIX}roll x y ` - Used to roll x many y sized dice.\n"
-                               f"• `{BOT_PREFIX}flip_coin` - Returns heads or tails.\n"
-                               f"• `{BOT_PREFIX}agile    ` - Lists the four values of agile\n"
-                               f"• `{BOT_PREFIX}schedule ` - Shows the schedule\n"
-                               f"• `{BOT_PREFIX}urban x  ` - Gets the urban dictionary definition of x"
-                               f"\n"
+                               "• `" + BOT_PREFIX + "help     ` - For obvious reasons.\n"
+                               "• `" + BOT_PREFIX + "clear x  ` - Used to clear the page for x many minutes so that we don't get in trouble.\n"
+                               "• `" + BOT_PREFIX + "groups x ` - Used to create groups of x many people.\n"
+                               "• `" + BOT_PREFIX + "roll x y ` - Used to roll x many y sized dice.\n"
+                               "• `" + BOT_PREFIX + "flip_coin` - Returns heads or tails.\n"
+                               "• `" + BOT_PREFIX + "agile    ` - Lists the four values of agile\n"
+                               "• `" + BOT_PREFIX + "schedule ` - Shows the schedule\n"
+                               "• `" + BOT_PREFIX + "urban x  ` - Gets the urban dictionary definition of x"
+                               "\n"
                                )
 
 if __name__ == "__main__":
