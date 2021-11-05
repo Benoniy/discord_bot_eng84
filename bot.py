@@ -8,7 +8,7 @@ import asyncio
 import random
 from aiohttp import ClientSession
 
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 import group_picker
 import scheduling
